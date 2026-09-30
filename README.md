@@ -6,7 +6,7 @@ A hands-on AWS project demonstrating how to provision and deploy an EC2 web serv
 
 In this lab, I used AWS CloudFormation to provision an EC2-based web server infrastructure and then deployed a simple Apache web server on the instance.
 
-The infrastructure was created and managed through a CloudFormation template instead of creating each resource manually.
+The infrastructure was created and managed through a CloudFormation template instead of creating each resource manually through the AWS Console.
 
 ## AWS Resources
 
@@ -81,7 +81,7 @@ The Security Groups were configured to allow:
 * HTTP traffic on port 80
 * SSH traffic on port 22
 
-This allowed the web server to be accessed from the internet and the EC2 instance to be managed through SSH/EC2 Instance Connect.
+This allowed the web server to be accessed from the internet and the EC2 instance to be managed through EC2 Instance Connect.
 
 ## CloudFormation Outputs
 
@@ -121,31 +121,30 @@ The CloudFormation stack successfully provisioned the EC2 infrastructure, config
 
 ## Screenshots
 
-### CloudFormation Stack
+### 1. CloudFormation Stack
 
-![CloudFormation Stack](screenshots/stack-complete.png)
+![CloudFormation Stack](screenshots/01-stack-complete.png)
 
-### CloudFormation Resources
+### 2. CloudFormation Resources
 
-![CloudFormation Resources](screenshots/resources.png)
+![CloudFormation Resources](screenshots/02-cloudformation-resources.png)
 
-### EC2 Instance
+### 3. EC2 Instance
 
-![EC2 Instance](screenshots/ec2-instance.png)
+![EC2 Instance](screenshots/03-ec2-instance.png)
 
-### Security Groups
+### 4. Security Groups
 
-![Security Groups](screenshots/security-groups.png)
+![Security Groups](screenshots/04-security-groups.png)
 
-### Elastic IP
+### 5. Elastic IP
 
-![Elastic IP](screenshots/elastic-ip.png)
+![Elastic IP](screenshots/05-elastic-ip.png)
 
-### Web Server
+### 6. Web Server
 
-![Web Server](screenshots/web-server.png)
+![Web Server](screenshots/06-web-server.png)
 
-### CloudFormation Outputs
+### 7. CloudFormation Outputs
 
-![CloudFormation Outputs](screenshots/outputs.png)
-
+![CloudFormation Outputs](screenshots/07-cloudformation-outputs.png)
