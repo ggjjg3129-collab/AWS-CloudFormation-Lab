@@ -1,35 +1,151 @@
-# AWS CloudFormation EC2 Lab
+# AWS CloudFormation EC2 Web Server Lab
 
-A hands-on AWS CloudFormation project demonstrating Infrastructure as Code (IaC).
+A hands-on AWS project demonstrating how to provision and deploy an EC2 web server using AWS CloudFormation and Infrastructure as Code (IaC).
 
-## What I Built
+## Project Overview
 
-Using AWS CloudFormation, I created:
+In this lab, I used AWS CloudFormation to provision an EC2-based web server infrastructure and then deployed a simple Apache web server on the instance.
 
-* EC2 Instance
+The infrastructure was created and managed through a CloudFormation template instead of creating each resource manually.
+
+## AWS Resources
+
+The CloudFormation stack creates:
+
+* Amazon EC2 Instance
 * SSH Security Group
 * Web Server Security Group
 * Elastic IP
 * VPC-based configuration
 
-## What I Practiced
+## Architecture
 
-* Creating AWS infrastructure using CloudFormation
-* Using CloudFormation Parameters
-* Using `!Ref` and `!GetAtt`
-* Configuring EC2 Security Groups
-* Attaching an Elastic IP to an EC2 instance
-* Understanding CloudFormation resource dependencies
-* Troubleshooting CloudFormation deployment errors
+```text
+Internet
+   |
+   v
+Elastic IP
+   |
+   v
+EC2 Instance
+   |
+   v
+Security Groups
+   |
+   v
+Apache Web Server
+   |
+   v
+Web Page
+```
 
-## AWS Services
+## CloudFormation
+
+The infrastructure is defined in:
+
+`cloudformation.yaml`
+
+The template demonstrates:
+
+* CloudFormation Parameters
+* `!Ref`
+* `!GetAtt`
+* EC2 configuration
+* Security Group configuration
+* Elastic IP association
+* CloudFormation Outputs
+
+## Web Server Deployment
+
+After the EC2 instance was successfully created, I connected to the instance using EC2 Instance Connect and installed Apache:
+
+```bash
+sudo dnf update -y
+sudo dnf install -y httpd
+sudo systemctl start httpd
+sudo systemctl enable httpd
+```
+
+I then deployed a custom HTML page:
+
+```bash
+echo "<h1>AWS CloudFormation EC2 Lab</h1><p>Web server successfully deployed on Amazon EC2.</p>" | sudo tee /var/www/html/index.html
+```
+
+The application was accessed through the Elastic IP using HTTP.
+
+## Security Configuration
+
+The Security Groups were configured to allow:
+
+* HTTP traffic on port 80
+* SSH traffic on port 22
+
+This allowed the web server to be accessed from the internet and the EC2 instance to be managed through SSH/EC2 Instance Connect.
+
+## CloudFormation Outputs
+
+The stack exposes:
+
+* EC2 Instance ID
+* Elastic IP address
+
+This makes important deployment information available directly from the CloudFormation console.
+
+## Troubleshooting
+
+During the lab, I worked through several real AWS deployment issues, including:
+
+* Default VPC configuration
+* EC2 instance type compatibility
+* VPC Security Group configuration
+* CloudFormation resource dependencies
+* Circular dependency between resources
+* Updating an existing CloudFormation stack
+
+These issues helped me understand how CloudFormation resources depend on each other and how infrastructure configuration affects deployment.
+
+## Project Result
+
+The CloudFormation stack successfully provisioned the EC2 infrastructure, configured the required Security Groups, associated an Elastic IP, and hosted a working Apache web server accessible through the internet.
+
+## Technologies
 
 * AWS CloudFormation
 * Amazon EC2
 * Amazon VPC
-* Security Groups
+* AWS Security Groups
 * Elastic IP
+* Apache HTTP Server
+* YAML
 
-## Result
+## Screenshots
 
-The CloudFormation stack successfully created the required EC2 infrastructure and associated networking resources.
+### CloudFormation Stack
+
+![CloudFormation Stack](screenshots/stack-complete.png)
+
+### CloudFormation Resources
+
+![CloudFormation Resources](screenshots/resources.png)
+
+### EC2 Instance
+
+![EC2 Instance](screenshots/ec2-instance.png)
+
+### Security Groups
+
+![Security Groups](screenshots/security-groups.png)
+
+### Elastic IP
+
+![Elastic IP](screenshots/elastic-ip.png)
+
+### Web Server
+
+![Web Server](screenshots/web-server.png)
+
+### CloudFormation Outputs
+
+![CloudFormation Outputs](screenshots/outputs.png)
+
