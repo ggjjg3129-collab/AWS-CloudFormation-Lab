@@ -52,3 +52,12 @@ Resources:
     Properties:
       Domain: vpc
       InstanceId: !Ref MyInstance
+Outputs:
+  InstanceId:
+    Description: EC2 Instance ID
+    Value: !Ref MyInstance
+
+  ElasticIP:
+    Description: Elastic IP address of the EC2 instance
+    Value: !Ref MyEIP
+
